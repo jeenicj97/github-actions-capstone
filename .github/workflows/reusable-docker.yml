@@ -48,4 +48,4 @@ jobs:
             - name: Output Image URL
               id: output
               run: |
-                echo "image={{ secrets.DOCKER_USERNAME }}/${{ inputs.image_name }}:${{ inputs.tag }}" >> $GITHUB_OUTPUT
+                echo "image=${{ secrets.DOCKER_USERNAME }}/${{ inputs.image_name }}:${{ inputs.tag }}" >> $GITHUB_OUTPUT
