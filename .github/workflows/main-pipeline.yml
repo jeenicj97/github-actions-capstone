@@ -38,7 +38,7 @@ jobs:
             name: production
         steps:
             - run: |
-                 echo "Deploying image: ""
+                 echo "Deploying image:"
                  echo "${{ needs.docker.outputs.image_url }}"
             
 
