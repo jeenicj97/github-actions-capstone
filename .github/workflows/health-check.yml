@@ -22,7 +22,7 @@ jobs:
 
             - name: Run container in detached mode
               run: |
-                docker run -d -p --name app 5000:5000 ${{ vars.DOCKER_USERNAME }}/gha-capstone:latest
+                docker run -d --name app -p 5000:5000 ${{ vars.DOCKER_USERNAME }}/gha-capstone:latest
 
             - name: Wait 5secs
               run: sleep 5
