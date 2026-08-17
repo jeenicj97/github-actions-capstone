@@ -47,8 +47,8 @@ pytest
 ## Running with Docker
 
 ```bash
-docker build -t github-actions-capstone .
-docker run -p 5000:5000 github-actions-capstone
+docker build -t gha-capstone .
+docker run -p 5000:5000 gha-capstone
 ```
 
 ## CI/CD Pipeline
@@ -76,4 +76,16 @@ Merge to main ──► build & test ──► Docker build & push ──► dep
 
 Every 12 hours ──► pull image ──► run container ──► curl /health ──► report
 ```
+---
+
+## Status Badges
+ 
+Add these to the top of this file once workflows have run at least once (replace `<owner>`/`<repo>`):
+ 
+```markdown
+![PR Pipeline]([![PR Pipeline](https://github.com/jeenicj97/github-actions-capstone/actions/workflows/pr-pipeline.yml/badge.svg)](https://github.com/jeenicj97/github-actions-capstone/actions/workflows/pr-pipeline.yml))
+![Main Pipeline]([![Main Pipeline](https://github.com/jeenicj97/github-actions-capstone/actions/workflows/main-pipeline.yml/badge.svg)](https://github.com/jeenicj97/github-actions-capstone/actions/workflows/main-pipeline.yml))
+![Health Check]([![Health check schedule](https://github.com/jeenicj97/github-actions-capstone/actions/workflows/health-check.yml/badge.svg)](https://github.com/jeenicj97/github-actions-capstone/actions/workflows/health-check.yml))
+```
+
 ---
