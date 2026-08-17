@@ -47,7 +47,7 @@ jobs:
                 path: trivy-report.txt
 
     deploy:
-        needs: docker
+        needs: security-scan
         runs-on: ubuntu-latest
         environment: 
             name: production
