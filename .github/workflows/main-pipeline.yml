@@ -18,8 +18,8 @@ jobs:
         with:
             image_name: gha-capstone
             tag: latest
-        secrets:
             docker_username: ${{ vars.DOCKER_USERNAME }}
+        secrets:
             docker_password: ${{ secrets.DOCKER_PASSWORD }}
 
     docker-sha:
