@@ -1,0 +1,45 @@
+name: Health check schedule
+
+on:
+    workflow_dispatch:
+
+    schedule:
+        - cron: "0 */12 * * *"
+
+jobs:
+    health:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Login into Docker
+              uses: docker/login-action@v3
+              with:
+                username: ${{ vars.DOCKER_USERNAME }}
+                password: ${{ secrets.DOCKER_PASSWORD }}
+
+            - name: Pull image
+              run: |
+                docker pull ${{ vars.DOCKER_USERNAME }}/gha-capstone:latest
+
+            - name: Run container in detached mode
+              run: |
+                docker run -d -p --name app 5000:5000 ${{ vars.DOCKER_USERNAME }}/gha-capstone:latest
+
+            - name: Wait 5secs
+              run: sleep 5
+
+            - name: Health Check
+              run: |
+                curl http://localhost:5000/health
+
+            - name: Cleanup
+              if: always()
+              run: |
+                docker stop app
+                docker rm app
+
+            - name: Summary
+              run: |
+                echo "## Health Check Report" >> $GITHUB_STEP_SUMMARY
+                echo "- Image: myapp:latest" >> $GITHUB_STEP_SUMMARY
+                echo "- Status: PASSED" >> $GITHUB_STEP_SUMMARY
+                echo "- Time: $(date)" >> $GITHUB_STEP_SUMMARY
