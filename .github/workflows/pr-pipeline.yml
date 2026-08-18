@@ -8,6 +8,10 @@ on:
       - opened
       - synchronize
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   build-test:
     uses: ./.github/workflows/reusable-build-test.yml
@@ -15,11 +19,24 @@ jobs:
       python_version: "3.11"
       run_tests: true
       
+  dependency-review:
+    name: Check dependencies for vulnerabilities
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: critical
+          
   pr-comment:
-    needs: build-test
+    needs: 
+      - build-test
+      - dependency-review
+
     runs-on: ubuntu-latest
     steps:
       - run: |
           echo "PR checks passed for branch: ${{ github.head_ref }}."
-    
-    
