@@ -1,6 +1,6 @@
 # GitHub Actions Capstone - End-to-End CI/CD Pipeline
 
-A simple Flask app used to demonstrate a full CI/CD pipeline built entirely with reusable GitHub Actions workflows - covering PR checks, main-branch build/push/deploy, and scheduled health monitoring.
+A simple Flask app used to demonstrate a full CI/CD pipeline built entirely with reusable GitHub Actions workflows - covering PR checks, main-branch build/push/deploy, and scheduled health monitoring, etc.
 
 ## App
 
